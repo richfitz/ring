@@ -1,0 +1,160 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+<title>Index. ring 0.0.5</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="author" content="">
+
+<link href="css/bootstrap.css" rel="stylesheet">
+<link href="css/bootstrap-responsive.css" rel="stylesheet">
+<link href="css/highlight.css" rel="stylesheet">
+<link href="css/staticdocs.css" rel="stylesheet">
+
+<!--[if lt IE 9]>
+  <script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
+<![endif]-->
+
+<script type="text/x-mathjax-config">
+  MathJax.Hub.Config({
+    tex2jax: {
+      inlineMath: [ ['$','$'], ["\\(","\\)"] ],
+      processEscapes: true
+    }
+  });
+</script>
+<script type="text/javascript"
+  src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
+</script>
+  </head>
+
+  <body>
+    <div class="navbar">
+  <div class="navbar-inner">
+    <div class="container">
+      <a class="brand" href="#">ring 0.0.5</a>
+      <div class="nav">
+        <ul class="nav">
+          <li><a href="index.html"><i class="icon-home icon-white"></i> Index</a></li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</div>
+
+    <div class="container">
+      <header>
+        
+      </header>
+      
+      <div class="row">
+  <div class="span8">
+    <h1>ring</h1>
+
+<p><a href="https://travis-ci.org/richfitz/ring"><img src="https://travis-ci.org/richfitz/ring.svg?branch=master" alt="Linux Build Status"/></a>
+<a href="https://ci.appveyor.com/project/richfitz/ring"><img src="https://ci.appveyor.com/api/projects/status/github/richfitz/ring?svg=true" alt="Windows Build status"/></a>
+<a href="https://codecov.io/github/richfitz/ring?branch=master"><img src="https://codecov.io/github/richfitz/ring/coverage.svg?branch=master" alt="codecov.io"/></a></p>
+
+<blockquote>
+<p>Ring buffers in R and C</p>
+</blockquote>
+
+<p>Ring buffers (or circular buffers) are like arrays that seem circular; data is written and read in a first-in-first-out (FIFO) style, but once allocated subsequent writes do not cause memory allocations.  Circular buffers are useful for collecting and processing data streams or for queues (with a fixed maximum size).  I use them to implement a solver for delay differential equations in <a href="https://github.com/richfitz/dde">dde</a>.</p>
+
+<p>This package provides two implementations of ring buffers:</p>
+
+<ol>
+<li><code>ring_buffer_env</code>: a pure R ring buffer implemented as double linked list (using environments) that is genuinely a ring.</li>
+<li><code>ring_buffer_bytes</code>: a ring buffer implemented as an array of bytes with a pair of pointers (in C).  Each &ldquo;element&rdquo; of the array can be one or more bytes, but each must have a fixed size.  There are two convenience interfaces:
+
+<ul>
+<li><code>ring_buffer_bytes_translate</code>: for cases where a raw-&gt;R and R-&gt;raw translation functions are provided</li>
+<li><code>ring_buffer_bytes_typed</code> for cases where each element should correspond to a fixed-length vector of one of R&#39;s core numeric-ish types (<code>logical</code>, <code>integer</code>, <code>numeric</code>, <code>complex</code>)</li>
+</ul></li>
+</ol>
+
+<p>Both buffer types can be used from R, and the code underlying <code>ring_buffer_bytes</code> can also be used compiled code in other packages using R&#39;s <code>LinkingTo:</code> support.  A common set of methods is provided, though these do differ in some details.</p>
+
+<p>Both buffer types will refuse to underflow (return elements beyond those that have been written).  The behaviour on overflow can be controlled:</p>
+
+<ul>
+<li>overwrite old data: (the default), for a fixed-memory FIFO buffer</li>
+<li>grow buffer: expand the buffer geometrically to fit required elements (which will require additional memory allocations and copies)</li>
+<li>throw error: refuse to overflow</li>
+</ul>
+
+<p>See the <a href="https://richfitz.github.io/ring">reference documentation</a> for details.</p>
+
+<h2>Usage</h2>
+
+<p>See the vignette <a href="https://richfitz.github.io/ring/vignettes/ring.html">online</a> (the vignette is not currently shipped with the pacakge as installed via <code>install_github</code>, though once the package in on CRAN it will be available with <code>code(vignette(&quot;ring&quot;))</code>.</p>
+
+<p>A second <a href="https://richfitz.github.io/ring/vignettes/ring_applications.html%22">vignette</a> describes possible data structures using a ring buffer.</p>
+
+<p>The reference documentation is also available <a href="https://richfitz.github.io/ring">online</a>, or from the package.</p>
+
+<h2>Installation</h2>
+
+<p>Requires a working C compiler (e.g., rtools on Windows, Xcode on a mac).</p>
+
+<pre><code class="r">remotes::install_github(&quot;richfitz/ring&quot;, upgrade = FALSE)
+</code></pre>
+
+<h2>License</h2>
+
+<p>MIT + file LICENSE © <a href="https://github.com/richfitz">Rich FitzJohn</a>.</p>
+
+<p>Please note that this project is released with a [Contributor Code of Conduct](CONDUCT.md). By participating in this project you agree to abide by its terms.</p>
+
+
+    <h2>Help topics</h2>
+
+    <h3></h3>
+    
+    
+    <ul class="index">
+        
+      <li>
+        <code><a href="ring_buffer_bytes.html">ring_buffer_bytes</a></code><br />Byte array based ring buffer</li>
+            
+      <li>
+        <code><a href="ring_buffer_bytes_translate.html">ring_buffer_bytes_translate</a></code><br />Translating bytes ring buffer</li>
+            
+      <li>
+        <code><a href="ring_buffer_bytes_typed.html">ring_buffer_bytes_typed</a></code><br />Typed bytes ring buffer</li>
+            
+      <li>
+        <code><a href="ring_buffer_env.html">ring_buffer_env</a></code><br />Environment-based ring buffer</li>
+    
+    </ul>
+  </div>
+  
+  <div class="span3 offset1">
+    <h2>Vignettes</h2>
+    <ul>
+      <li><a href="vignettes/ring_applications.html">ring_applications</a></li>
+      <li><a href="vignettes/ring.html">ring</a></li>
+    </ul>
+        
+    <h2>Dependencies</h2>
+    <ul>
+      
+      <li><strong>Imports</strong>: R6</li>
+      <li><strong>Suggests</strong>: testthat, knitr, rmarkdown</li>
+      
+    </ul>
+    <h2>Authors</h2>
+    <ul>
+      <li><a href="mailto:rich.fitzjohn@gmail.com">Rich FitzJohn</a> [aut, cre]</li>
+    </ul>
+
+  </div>
+</div>
+      
+      <footer>
+      <p class="pull-right"><a href="#">Back to top</a></p>
+<p>Built by <a href="https://github.com/hadley/staticdocs">staticdocs</a>. Styled with <a href="http://twitter.github.com/bootstrap">bootstrap</a>.</p>
+      </footer>
+    </div>
+  </body>
+</html>
